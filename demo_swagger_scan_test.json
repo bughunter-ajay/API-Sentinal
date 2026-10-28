@@ -1,0 +1,268 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Demo Swagger Scan Test API",
+    "version": "1.0.0",
+    "description": "Synthetic OpenAPI spec built to exercise every check in the Swagger Scan tool — dangerous-endpoint categories, OWASP-aligned checks, and the base audit checks. Upload this file in the Swagger Scan tab to see each finding fire."
+  },
+  "servers": [
+    { "url": "http://api.demo-insecure.example.com", "description": "Legacy non-TLS server — triggers Insecure Servers" },
+    { "url": "https://api.demo.example.com", "description": "Primary HTTPS server" }
+  ],
+  "security": [ { "bearerAuth": [] } ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": { "type": "http", "scheme": "bearer", "bearerFormat": "JWT" },
+      "legacyApiKey": { "type": "apiKey", "in": "query", "name": "api_key", "description": "apiKey delivered via query string — triggers Weak apiKey Placement" }
+    },
+    "parameters": {},
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "email": { "type": "string" },
+          "password": { "type": "string", "example": "P@ssw0rd123" },
+          "ssn": { "type": "string", "example": "123-45-6789" },
+          "creditCard": { "type": "string", "example": "4111111111111111" },
+          "token": { "type": "string", "example": "AKIAIOSFODNN7EXAMPLE" }
+        }
+      },
+      "UserCreateRequest": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "password": { "type": "string" },
+          "role": { "type": "string", "example": "admin" },
+          "isAdmin": { "type": "boolean" }
+        }
+      },
+      "Widget": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" }
+        }
+      },
+      "BrokenRefExample": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/scripts/execute-js-adhoc": {
+      "post": {
+        "operationId": "executeJsAdhoc",
+        "summary": "Execute arbitrary JavaScript",
+        "description": "Runs an ad-hoc JavaScript snippet on the server for automation workflows.",
+        "tags": ["Automation"],
+        "requestBody": { "content": { "application/json": { "schema": { "type": "object", "properties": { "code": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Execution result" } }
+      }
+    },
+    "/data/execute-query": {
+      "post": {
+        "operationId": "executeQuery",
+        "summary": "Run raw SQL query",
+        "description": "Executes a raw SQL query against the configured datasource. Intended for internal reporting only.",
+        "tags": ["Data"],
+        "requestBody": { "content": { "application/json": { "schema": { "type": "object", "properties": { "sql": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Query result rows" } }
+      }
+    },
+    "/iam/admin/realms/{realm}/keycloak/proxy/{path}": {
+      "get": {
+        "operationId": "keycloakAdminProxy",
+        "summary": "Keycloak admin realm proxy",
+        "description": "Passthrough proxy into the Keycloak admin REST API for the given realm.",
+        "tags": ["IAM"],
+        "parameters": [
+          { "name": "realm", "in": "path", "required": true, "schema": { "type": "string" } },
+          { "name": "path", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Proxied response" } }
+      }
+    },
+    "/system/config-upload": {
+      "post": {
+        "operationId": "uploadVendorConfig",
+        "summary": "Upload vendor config file",
+        "description": "Uploads a vendor configuration file and installs it as the active system configuration.",
+        "tags": ["System"],
+        "requestBody": { "content": { "multipart/form-data": { "schema": { "type": "object", "properties": { "file": { "type": "string", "format": "binary" } } } } } },
+        "responses": { "200": { "description": "Config installed" } }
+      }
+    },
+    "/users/bulk-delete": {
+      "post": {
+        "operationId": "bulkDeleteUsers",
+        "summary": "Bulk delete users",
+        "description": "Deletes all user records matching the given filter in a single destructive operation.",
+        "tags": ["Users"],
+        "requestBody": { "content": { "application/json": { "schema": { "type": "object", "properties": { "filter": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Deleted count" } }
+      }
+    },
+    "/internal/deserialize": {
+      "post": {
+        "operationId": "deserializePayload",
+        "summary": "Deserialize object payload",
+        "description": "Deserializes an arbitrary binary object payload received from an upstream integration.",
+        "tags": ["Internal"],
+        "requestBody": { "content": { "application/octet-stream": { "schema": { "type": "string", "format": "binary" } } } },
+        "responses": { "200": { "description": "Deserialized object" } }
+      }
+    },
+    "/actuator/heapdump": {
+      "get": {
+        "operationId": "getHeapDump",
+        "summary": "Internal heap dump",
+        "description": "Internal diagnostic endpoint exposing a live JVM heap dump for debugging.",
+        "tags": ["Diagnostics"],
+        "security": [],
+        "responses": { "200": { "description": "Heap dump binary" } }
+      }
+    },
+    "/reports/search-query": {
+      "get": {
+        "operationId": "searchQueryReports",
+        "summary": "Dynamic filter query builder",
+        "description": "Builds and runs a dynamic filter query across the reporting dataset.",
+        "tags": ["Reports"],
+        "responses": { "200": { "description": "Report rows" } }
+      }
+    },
+    "/tools/config": {
+      "get": {
+        "operationId": "getDevToolConfig",
+        "summary": "Developer tool configuration",
+        "description": "Internal developer tooling configuration surface, not intended for production traffic.",
+        "tags": ["DevTools"],
+        "responses": { "200": { "description": "Tool config" } }
+      }
+    },
+    "/public/ping": {
+      "get": {
+        "operationId": "publicPing",
+        "summary": "Public health ping",
+        "description": "Unauthenticated public health-check endpoint — triggers Unsecured Endpoints.",
+        "tags": ["Public"],
+        "security": [],
+        "responses": { "200": { "description": "pong" } }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "operationId": "getUserById",
+        "summary": "Get user by id",
+        "description": "Returns a single user record including profile and security fields — triggers Sensitive Data Exposure.",
+        "tags": ["Users"],
+        "parameters": [ { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } } ],
+        "responses": {
+          "200": {
+            "description": "User object",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "operationId": "createUser",
+        "summary": "Create user",
+        "description": "Creates a new user account — request body accepts role/isAdmin directly, triggers Mass Assignment Risk.",
+        "tags": ["Users"],
+        "requestBody": { "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UserCreateRequest" } } } },
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/legacy/report": {
+      "get": {
+        "operationId": "getLegacyReport",
+        "summary": "Legacy report (deprecated)",
+        "description": "Deprecated legacy reporting endpoint that incorrectly accepts a GET request body. Still reachable in production — triggers GET-With-Body and Deprecated Endpoints.",
+        "tags": ["Legacy"],
+        "deprecated": true,
+        "requestBody": { "content": { "application/json": { "schema": { "type": "object", "properties": { "filters": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Report" } }
+      }
+    },
+    "/legacy/lookup": {
+      "get": {
+        "operationId": "legacyLookup",
+        "summary": "Legacy lookup via query API key",
+        "description": "Legacy lookup endpoint authenticated via an API key passed as a query parameter.",
+        "tags": ["Legacy"],
+        "security": [ { "legacyApiKey": [] } ],
+        "responses": { "200": { "description": "Lookup result" } }
+      }
+    },
+    "/legacy/duplicate-demo": {
+      "post": {
+        "operationId": "duplicateDemoLower",
+        "summary": "Duplicate demo (lowercase method key)",
+        "description": "Same path + method defined twice with different key casing (post/POST) — triggers Duplicate Endpoints.",
+        "tags": ["Legacy"],
+        "responses": { "200": { "description": "OK" } }
+      },
+      "POST": {
+        "operationId": "duplicateDemoUpper",
+        "summary": "Duplicate demo (uppercase method key)",
+        "tags": ["Legacy"],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/broken-ref-demo/{id}": {
+      "get": {
+        "operationId": "brokenRefDemo",
+        "summary": "Broken $ref demo",
+        "description": "Parameter references a component that does not exist in components.parameters — triggers Broken Refs.",
+        "tags": ["Demo"],
+        "parameters": [ { "$ref": "#/components/parameters/MissingParam" } ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/BrokenRefExample" } } }
+          }
+        }
+      }
+    },
+    "/widgets": {
+      "get": {
+        "operationId": "listWidgets",
+        "summary": "List widgets",
+        "description": "Plain CRUD listing endpoint — part of the Multi-Method Path demo.",
+        "tags": ["Widgets"],
+        "responses": { "200": { "description": "Widget list", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Widget" } } } } } }
+      },
+      "post": {
+        "operationId": "createWidget",
+        "summary": "Create widget",
+        "tags": ["Widgets"],
+        "requestBody": { "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Widget" } } } },
+        "responses": { "201": { "description": "Created" } }
+      },
+      "put": {
+        "operationId": "replaceWidget",
+        "summary": "Replace widget",
+        "tags": ["Widgets"],
+        "responses": { "200": { "description": "Replaced" } }
+      },
+      "delete": {
+        "operationId": "deleteWidget",
+        "summary": "Delete widget",
+        "tags": ["Widgets"],
+        "responses": { "204": { "description": "Deleted" } }
+      },
+      "patch": {
+        "summary": "Patch widget — no operationId, no responses block",
+        "description": "Deliberately missing operationId and responses — triggers Missing operationId and No Response.",
+        "tags": ["Widgets"],
+        "responses": {}
+      }
+    }
+  }
+}

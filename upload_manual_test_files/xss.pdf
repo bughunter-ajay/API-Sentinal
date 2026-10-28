@@ -1,0 +1,6 @@
+%PDF-1.4
+1 0 obj<</Type/Catalog/OpenAction<</Type/Action/S/JavaScript/JS(app.alert("XSS"))>>>>endobj
+xref
+0 0
+trailer<</Root 1 0 R>>
+%%EOF

@@ -1,0 +1,159 @@
+n,disk_file,send_as,logical_name,category,content_type,size,description
+1,valid.jpg,valid.jpg,valid.jpg,baseline,image/jpeg,22,Legit JPEG image
+2,valid.png,valid.png,valid.png,baseline,image/png,67,Legit PNG image
+3,valid.gif,valid.gif,valid.gif,baseline,image/gif,43,Legit GIF image
+4,valid.webp,valid.webp,valid.webp,baseline,image/webp,24,Legit WEBP header
+5,valid.svg,valid.svg,valid.svg,baseline,image/svg+xml,76,Legit SVG (benign)
+6,valid.xlsx,valid.xlsx,valid.xlsx,baseline,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,1572,Legit Excel OOXML (.xlsx)
+7,valid.xls,valid.xls,valid.xls,baseline,application/vnd.ms-excel,512,Legit-looking OLE .xls stub
+8,valid.csv,valid.csv,valid.csv,baseline,text/csv,24,Legit CSV spreadsheet
+9,valid.docx,valid.docx,valid.docx,baseline,application/vnd.openxmlformats-officedocument.wordprocessingml.document,910,Legit Word OOXML (.docx)
+10,valid.pptx,valid.pptx,valid.pptx,baseline,application/vnd.openxmlformats-officedocument.presentationml.presentation,1552,Legit PowerPoint OOXML (.pptx)
+11,valid.zip,valid.zip,valid.zip,baseline,application/zip,144,Legit ZIP with readme.txt
+12,valid_nested.zip,valid_nested.zip,valid_nested.zip,baseline,application/zip,256,Legit nested-folder ZIP
+13,valid.pdf,valid.pdf,valid.pdf,baseline,application/pdf,45,Legit PDF
+14,valid.txt,valid.txt,valid.txt,baseline,text/plain,5,Legit text
+15,valid.html,valid.html,valid.html,baseline,text/html,31,Legit HTML
+16,exploit.php,exploit.php,exploit.php,sol1_basic,application/x-php,47,Sol 1: PHP file reader
+17,shell.php,shell.php,shell.php,sol1_basic,application/x-php,30,Sol 1: PHP system() shell
+18,shell.phtml,shell.phtml,shell.phtml,sol1_basic,application/x-php,30,Sol 1: .phtml extension
+19,shell.php5,shell.php5,shell.php5,sol1_basic,application/x-php,30,Sol 1: .php5 extension
+20,shell.jsp,shell.jsp,shell.jsp,sol1_basic,application/x-jsp,61,Sol 1: JSP webshell
+21,shell.aspx,shell.aspx,shell.aspx,sol1_basic,application/x-aspx,75,Sol 1: ASPX webshell
+22,mime_jpg.php,mime_jpg.php,mime_jpg.php,sol2_mime,image/jpeg,47,Sol 2: PHP as image/jpeg
+23,mime_png.php,mime_png.php,mime_png.php,sol2_mime,image/png,47,Sol 2: PHP as image/png
+24,mime_gif.php,mime_gif.php,mime_gif.php,sol2_mime,image/gif,47,Sol 2: PHP as image/gif
+25,mime_pdf.php,mime_pdf.php,mime_pdf.php,sol2_mime,application/pdf,47,Sol 2: PHP as application/pdf
+26,dotdot_exploit.php,../exploit.php,trav_plain.php,sol3_traversal,application/x-php,47,"Sol 3: filename ""../exploit.php"""
+27,dotdot_pct_2fexploit.php,..%2fexploit.php,trav_urlenc.php,sol3_traversal,application/x-php,47,"Sol 3: filename ""..%2fexploit.php"""
+28,dotdot_pct_252fexploit.php,..%252fexploit.php,trav_dblenc.php,sol3_traversal,application/x-php,47,"Sol 3: filename ""..%252fexploit.php"""
+29,dotdot_exploit_2.php,..\exploit.php,trav_win.php,sol3_traversal,application/x-php,47,"Sol 3: filename ""..\exploit.php"""
+30,dotdot_dotdot_dotdot_etc_passwd.txt,../../../etc/passwd,trav_passwd.txt,sol3_traversal,text/plain,10,"Sol 3: filename ""../../../etc/passwd"""
+31,dot_htaccess,.htaccess,htaccess_l33t,sol4_htaccess,text/plain,37,Sol 4: .htaccess maps .l33t → PHP
+32,exploit.l33t,exploit.l33t,exploit.l33t,sol4_htaccess,image/jpeg,47,Sol 4: PHP as .l33t (image MIME)
+33,dot_htaccess_2,.htaccess,htaccess_jpg,sol4_htaccess,text/plain,36,Sol 4: .htaccess maps .jpg → PHP
+34,exploit.php_null_.jpg,exploit.php%00.jpg,nb1.php,sol5_nullbyte,image/jpeg,47,"Sol 5: ""exploit.php%00.jpg"""
+35,exploit.php_pct_2500.jpg,exploit.php%2500.jpg,nb2.php,sol5_nullbyte,image/jpeg,47,"Sol 5: ""exploit.php%2500.jpg"""
+36,exploit.asp;.jpg,exploit.asp;.jpg,nb3.php,sol5_nullbyte,image/jpeg,47,"Sol 5: ""exploit.asp;.jpg"" (IIS)"
+37,exploit.php.,exploit.php.,nb4.php,sol5_nullbyte,image/jpeg,47,"Sol 5: ""exploit.php."" trailing dot"
+38,exif_secret.php,exif_secret.php,exif_secret.php,sol6_exif,image/jpeg,73,Sol 6: JPEG EXIF comment = PHP (.php)
+39,exif_secret.jpg,exif_secret.jpg,exif_secret.jpg,sol6_exif,image/jpeg,73,Sol 6: EXIF polyglot as .jpg
+40,gif_polyglot.php,gif_polyglot.php,gif_polyglot.php,sol6_exif,image/gif,91,Sol 6: GIF89a + PHP (.php)
+41,png_polyglot.php,png_polyglot.php,png_polyglot.php,sol6_exif,image/png,114,Sol 6: PNG bytes + PHP (.php)
+42,bypass.php.jpg,bypass.php.jpg,bypass.php.jpg,ext_bypass,image/jpeg,30,Double ext .php.jpg
+43,bypass.jpg.php,bypass.jpg.php,bypass.jpg.php,ext_bypass,image/jpeg,30,Reversed .jpg.php
+44,bypass.pHp,bypass.pHp,bypass.pHp,ext_bypass,image/jpeg,30,Case bypass .pHp
+45,bypass_2.PHP,bypass.PHP,bypass.PHP,ext_bypass,image/jpeg,30,Uppercase .PHP
+46,bypass.php7,bypass.php7,bypass.php7,ext_bypass,image/jpeg,30,ext .php7
+47,bypass.php.,bypass.php.,bypass.php.,ext_bypass,image/jpeg,30,Trailing dot .php.
+48,svg_onload_alert.svg,svg_onload_alert.svg,svg_onload_alert.svg,svg_xss,image/svg+xml,106,SVG XSS: onload alert
+49,svg_script_tag.svg,svg_script_tag.svg,svg_script_tag.svg,svg_xss,image/svg+xml,113,SVG XSS: script tag
+50,svg_animate_begin.svg,svg_animate_begin.svg,svg_animate_begin.svg,svg_xss,image/svg+xml,102,SVG XSS: animate begin
+51,svg_img_onerror.svg,svg_img_onerror.svg,svg_img_onerror.svg,svg_xss,image/svg+xml,82,SVG XSS: img onerror
+52,svg_foreignobject.svg,svg_foreignobject.svg,svg_foreignobject.svg,svg_xss,image/svg+xml,137,SVG XSS: foreignobject
+53,svg_as_jpg.jpg,svg_as_jpg.jpg,svg_as_jpg.jpg,svg_xss,image/jpeg,106,SVG XSS disguised as .jpg
+54,svg_as_png.png,svg_as_png.png,svg_as_png.png,svg_xss,image/png,113,SVG XSS disguised as .png
+55,xss.html,xss.html,xss.html,xss_file,text/html,96,HTML <script> XSS
+56,xxe.xml,xxe.xml,xxe.xml,xss_file,application/xml,84,XML XXE /etc/passwd
+57,xss.pdf,xss.pdf,xss.pdf,xss_file,application/pdf,138,PDF JavaScript alert
+58,xss.csv,xss.csv,xss.csv,xss_file,text/csv,86,CSV formula injection
+59,xss.txt,xss.txt,xss.txt,xss_file,text/plain,39,XSS in .txt
+60,xss.json,xss.json,xss.json,xss_file,application/json,49,JSON proto-pollution XSS
+61,redir_openaction.pdf,redir_openaction.pdf,redir_openaction.pdf,redirect_content,application/pdf,286,PDF OpenAction URI auto-redirect on open
+62,redir_pdf_js.pdf,redir_pdf_js.pdf,redir_pdf_js.pdf,redirect_content,application/pdf,120,PDF JavaScript app.launchURL redirect (Adobe)
+63,redir_meta.html,redir_meta.html,redir_meta.html,redirect_content,text/html,180,HTML meta-refresh + JS redirect
+64,redir_iframe.html,redir_iframe.html,redir_iframe.html,redirect_content,text/html,195,HTML full-page iframe + top.location redirect
+65,redir_svg.svg,redir_svg.svg,redir_svg.svg,redirect_content,image/svg+xml,138,SVG onload window.location redirect
+66,redir_xslt.xml,redir_xslt.xml,redir_xslt.xml,redirect_content,application/xml,263,XML/XSLT server-side redirect
+67,redir_office.rels.xml,redir_office.rels.xml,redir_office.rels.xml,redirect_content,application/xml,316,Office _rels external-relationship hyperlink
+68,redir_hyperlink.csv,redir_hyperlink.csv,redir_hyperlink.csv,redirect_content,text/csv,112,CSV =HYPERLINK formula redirect
+69,redir_dde.csv,redir_dde.csv,redir_dde.csv,redirect_content,text/csv,90,CSV DDE command execution
+70,redir_field.json,redir_field.json,redir_field.json,redirect_content,application/json,95,JSON redirect/url/location field (if app follows)
+71,redir_proto.json,redir_proto.json,redir_proto.json,redirect_content,application/json,114,JSON prototype pollution -> redirect
+72,redir_png_polyglot.png,redir_png_polyglot.png,redir_png_polyglot.png,redirect_content,image/png,121,PNG magic bytes + HTML redirect polyglot
+73,redir_gif_polyglot.gif,redir_gif_polyglot.gif,redir_gif_polyglot.gif,redirect_content,image/gif,97,GIF magic bytes + HTML redirect polyglot
+74,redir_webp_svg.webp,redir_webp_svg.webp,redir_webp_svg.webp,redirect_content,image/webp,137,WEBP header + SVG redirect polyglot
+75,redir_txt.txt,redir_txt.txt,redir_txt.txt,redirect_content,text/plain,117,TXT with HTML redirect (if served as text/html)
+76,dot_env,.env,.env,dangerous,text/plain,29,.env credential file
+77,web.config,web.config,web.config,dangerous,text/xml,128,IIS web.config → PHP
+78,index.php,index.php,index.php,dangerous,application/x-php,30,index.php overwrite
+79,zip_with_shell.zip,zip_with_shell.zip,zip_with_shell.zip,archive,application/zip,167,ZIP containing exploit.php
+80,zip_slip.zip,zip_slip.zip,zip_slip.zip,archive,application/zip,193,Zip-Slip path traversal
+81,zero_bytes.jpg,zero_bytes.jpg,zero_bytes.jpg,size_test,image/jpeg,0,Zero-byte file
+82,xlsx_formula.xlsx,xlsx_formula.xlsx,xlsx_formula.xlsx,excel_formula,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,1615,Excel HYPERLINK / DDE-style formula cells
+83,xlsx_webservice.xlsx,xlsx_webservice.xlsx,xlsx_webservice.xlsx,excel_formula,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,1573,Excel WEBSERVICE() external call
+84,mime_xlsx.php,mime_xlsx.php,mime_xlsx.php,sol2_mime,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,47,Sol 2: PHP body with Excel OOXML MIME
+85,mime_xls.php,mime_xls.php,mime_xls.php,sol2_mime,application/vnd.ms-excel,47,Sol 2: PHP body with .xls MIME
+86,fake_xlsx.xlsx,fake_xlsx.xlsx,fake_xlsx.xlsx,sol2_mime,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,47,Sol 2: PHP content named .xlsx
+87,jpeg_as_xlsx.xlsx,jpeg_as_xlsx.xlsx,jpeg_as_xlsx.xlsx,sol2_mime,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,22,JPEG magic bytes named .xlsx (content mismatch)
+88,bypass.php.xlsx,bypass.php.xlsx,bypass.php.xlsx,ext_bypass,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,30,Double ext .php.xlsx
+89,bypass.xlsx.php,bypass.xlsx.php,bypass.xlsx.php,ext_bypass,application/x-php,1572,Reversed .xlsx.php (OOXML body)
+90,bypass.XLSX,bypass.XLSX,bypass.XLSX,ext_bypass,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,1572,Uppercase .XLSX
+91,exploit.php_null_.xlsx,exploit.php%00.xlsx,nb_xlsx.php,sol5_nullbyte,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,47,"Sol 5: ""exploit.php%00.xlsx"""
+92,exploit.xlsx;.php,exploit.xlsx;.php,nb_xlsx2.php,sol5_nullbyte,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,47,"Sol 5: ""exploit.xlsx;.php"""
+93,dotdot_report.xlsx,../report.xlsx,trav_xlsx.xlsx,sol3_traversal,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,1572,"Sol 3: filename ""../report.xlsx"""
+94,dotdot_pct_2freport.xlsx,..%2freport.xlsx,trav_xlsx_enc.xlsx,sol3_traversal,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,1572,"Sol 3: filename ""..%2freport.xlsx"""
+95,xlsx_with_shell.xlsx,xlsx_with_shell.xlsx,xlsx_with_shell.xlsx,archive,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,1719,OOXML ZIP containing exploit.php entry (undeclared — POI M.1.14)
+96,xlsx_shell_declared.xlsx,xlsx_shell_declared.xlsx,xlsx_shell_declared.xlsx,archive,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,1730,OOXML + exploit.php WITH Content_Types Override (POI-safe)
+97,xlsx_zipslip.xlsx,xlsx_zipslip.xlsx,xlsx_zipslip.xlsx,archive,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,1745,OOXML Zip-Slip path traversal entry
+98,zero_bytes.xlsx,zero_bytes.xlsx,zero_bytes.xlsx,size_test,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,0,Zero-byte .xlsx
+99,docx_xxe.docx,docx_xxe.docx,docx_xxe.docx,xss_file,application/vnd.openxmlformats-officedocument.wordprocessingml.document,946,DOCX with XXE in document.xml
+100,docx_with_shell.docx,docx_with_shell.docx,docx_with_shell.docx,archive,application/vnd.openxmlformats-officedocument.wordprocessingml.document,1057,DOCX ZIP + exploit.php entry
+101,docx_zipslip.docx,docx_zipslip.docx,docx_zipslip.docx,archive,application/vnd.openxmlformats-officedocument.wordprocessingml.document,1083,DOCX Zip-Slip path traversal entry
+102,mime_docx.php,mime_docx.php,mime_docx.php,sol2_mime,application/vnd.openxmlformats-officedocument.wordprocessingml.document,47,PHP body with Word OOXML MIME
+103,fake_docx.docx,fake_docx.docx,fake_docx.docx,sol2_mime,application/vnd.openxmlformats-officedocument.wordprocessingml.document,47,PHP content named .docx
+104,bypass.php.docx,bypass.php.docx,bypass.php.docx,ext_bypass,application/vnd.openxmlformats-officedocument.wordprocessingml.document,30,Double ext .php.docx
+105,bypass.docx.php,bypass.docx.php,bypass.docx.php,ext_bypass,application/x-php,910,Reversed .docx.php
+106,dotdot_report.docx,../report.docx,trav_docx.docx,sol3_traversal,application/vnd.openxmlformats-officedocument.wordprocessingml.document,910,"filename ""../report.docx"""
+107,exploit.php_null_.docx,exploit.php%00.docx,nb_docx.php,sol5_nullbyte,application/vnd.openxmlformats-officedocument.wordprocessingml.document,47,exploit.php%00.docx
+108,zero_bytes.docx,zero_bytes.docx,zero_bytes.docx,size_test,application/vnd.openxmlformats-officedocument.wordprocessingml.document,0,Zero-byte .docx
+109,pptx_with_shell.pptx,pptx_with_shell.pptx,pptx_with_shell.pptx,archive,application/vnd.openxmlformats-officedocument.presentationml.presentation,1699,PPTX ZIP + exploit.php entry
+110,mime_pptx.php,mime_pptx.php,mime_pptx.php,sol2_mime,application/vnd.openxmlformats-officedocument.presentationml.presentation,47,PHP body with PowerPoint MIME
+111,fake_pptx.pptx,fake_pptx.pptx,fake_pptx.pptx,sol2_mime,application/vnd.openxmlformats-officedocument.presentationml.presentation,47,PHP content named .pptx
+112,bypass.php.pptx,bypass.php.pptx,bypass.php.pptx,ext_bypass,application/vnd.openxmlformats-officedocument.presentationml.presentation,30,Double ext .php.pptx
+113,dotdot_deck.pptx,../deck.pptx,trav_pptx.pptx,sol3_traversal,application/vnd.openxmlformats-officedocument.presentationml.presentation,1552,"filename ""../deck.pptx"""
+114,zero_bytes.pptx,zero_bytes.pptx,zero_bytes.pptx,size_test,application/vnd.openxmlformats-officedocument.presentationml.presentation,0,Zero-byte .pptx
+115,zip_slip_win.zip,zip_slip_win.zip,zip_slip_win.zip,archive,application/zip,195,Zip-Slip Windows backslash
+116,payload.zip.php,payload.zip.php,zip_double_ext.zip.php,ext_bypass,application/x-php,111,Archive named .zip.php
+117,zip_as_xlsx.xlsx,zip_as_xlsx.xlsx,zip_as_xlsx.xlsx,sol2_mime,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,144,Plain ZIP bytes named .xlsx
+118,mime_zip.php,mime_zip.php,mime_zip.php,sol2_mime,application/zip,47,PHP body with application/zip MIME
+119,fake_zip.zip,fake_zip.zip,fake_zip.zip,sol2_mime,application/zip,47,PHP content named .zip
+120,dotdot_archive.zip,../archive.zip,trav_zip.zip,sol3_traversal,application/zip,144,"filename ""../archive.zip"""
+121,exploit.php_null_.zip,exploit.php%00.zip,nb_zip.php,sol5_nullbyte,application/zip,47,exploit.php%00.zip
+122,zero_bytes.zip,zero_bytes.zip,zero_bytes.zip,size_test,application/zip,0,Zero-byte .zip
+123,zip_html_polyglot.zip,zip_html_polyglot.zip,zip_html_polyglot.zip,archive,application/zip,183,ZIP + trailing HTML polyglot
+124,tar_gz_probe.tar.gz,tar_gz_probe.tar.gz,tar_gz_probe.tar.gz,archive,application/gzip,30,Gzip/tar magic probe
+125,rar_probe.rar,rar_probe.rar,rar_probe.rar,archive,application/x-rar-compressed,27,RAR magic probe
+126,7z_probe.7z,7z_probe.7z,7z_probe.7z,archive,application/x-7z-compressed,26,7z magic probe
+127,shell.asp,shell.asp,shell.asp,sol1_basic,application/x-asp,90,Classic ASP webshell
+128,shell.cer,shell.cer,shell.cer,sol1_basic,application/x-x509-ca-cert,90,IIS .cer → ASP trick
+129,shell.shtml,shell.shtml,shell.shtml,sol1_basic,text/html,60,SSI exec/include (.shtml)
+130,shell.cfm,shell.cfm,shell.cfm,sol1_basic,application/x-coldfusion,71,ColdFusion cfexecute
+131,shell.py,shell.py,shell.py,sol1_basic,text/x-python,49,Python CGI/script
+132,shell.sh,shell.sh,shell.sh,sol1_basic,application/x-sh,29,Shell script
+133,shell.cgi,shell.cgi,shell.cgi,sol1_basic,application/x-cgi,52,CGI shell script
+134,shell.jspx,shell.jspx,shell.jspx,sol1_basic,application/x-jsp,61,JSPX webshell
+135,shell.phar,shell.phar,shell.phar,sol1_basic,application/x-php,30,PHP phar archive/script
+136,dot_user.ini,.user.ini,dot_user.ini,dangerous,text/plain,30,.user.ini auto_prepend_file
+137,php.ini,php.ini,php.ini,dangerous,text/plain,49,php.ini upload
+138,web.xml,web.xml,web.xml,dangerous,text/xml,107,Java web.xml
+139,dot_htpasswd,.htpasswd,htpasswd,dangerous,text/plain,22,.htpasswd
+140,credentials.json,credentials.json,credentials.json,dangerous,application/json,53,credentials.json secrets file
+141,package.json,package.json,package.json,dangerous,application/json,44,package.json with preinstall script
+142,svg_xxe.svg,svg_xxe.svg,svg_xxe.svg,svg_xss,image/svg+xml,143,SVG XXE file:///etc/passwd
+143,pdf_jpeg_polyglot.pdf,pdf_jpeg_polyglot.pdf,pdf_jpeg_polyglot.pdf,sol6_exif,application/pdf,67,JPEG magic + PDF body polyglot (.pdf)
+144,pdf_jpeg_polyglot.jpg,pdf_jpeg_polyglot.jpg,pdf_jpeg_polyglot.jpg,sol6_exif,image/jpeg,67,JPEG magic + PDF body polyglot (.jpg)
+145,phar_jpg.jpg,phar_jpg.jpg,phar_jpg.jpg,sol6_exif,image/jpeg,49,PHP phar stub + JPEG polyglot
+146,eicar.com.txt,eicar.com.txt,eicar.com.txt,dangerous,text/plain,68,EICAR antivirus test file
+147,eicar.jpg,eicar.jpg,eicar.jpg,dangerous,image/jpeg,91,EICAR appended after JPEG magic
+148,large_512kb.bin,large_512kb.bin,large_512kb.bin,size_test,application/octet-stream,524288,512KB oversized probe
+149,safe_RTL_.php.jpg,safe‮.php.jpg,unicode_rtl.php,ext_bypass,image/jpeg,47,RTL override in filename (‮.php.jpg visual trick)
+150,shell.php__,shell.php  ,spaces.php,ext_bypass,application/x-php,47,"Filename with trailing spaces ""shell.php  """
+151,bypass.phtml.jpg,bypass.phtml.jpg,bypass.phtml.jpg,ext_bypass,image/jpeg,30,Double ext .phtml.jpg
+152,bypass.phar.jpg,bypass.phar.jpg,bypass.phar.jpg,ext_bypass,image/jpeg,30,Double ext .phar.jpg
+153,shell.asp;.jpg,shell.asp;.jpg,bypass.asp;.jpg,sol5_nullbyte,image/jpeg,90,"IIS semicolon ""shell.asp;.jpg"""
+154,shell.jar,shell.jar,shell.jar,archive,application/java-archive,305,JAR containing exploit.php
+155,shell.war,shell.war,shell.war,archive,application/java-archive,297,WAR containing exploit.jsp
+156,symlink.zip,symlink.zip,symlink.zip,archive,application/zip,246,ZIP with Unix symlink → /etc/passwd
+157,valid.bmp,valid.bmp,valid.bmp,baseline,image/bmp,58,Legit 1x1 BMP
+158,valid.ico,valid.ico,valid.ico,baseline,image/x-icon,62,Legit ICO header

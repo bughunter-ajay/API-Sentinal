@@ -1,0 +1,3 @@
+name,link
+=HYPERLINK("https://example.com","Click to view report")
+John,=HYPERLINK("https://example.com","Open")

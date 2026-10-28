@@ -1,0 +1,23 @@
+⏳ Waiting for backends...
+✅ API Validator ready on port 8765
+✅ HAR Runner ready on port 8766
+✅ Method Tampering ready on port 8767
+✅ Soft Delete ready on port 8769
+✅ IDOR Tester ready on port 8773
+✅ Swagger Scan ready on port 8771
+✅ Params Tamper ready on port 8772
+✅ RSQL Tester ready on port 8774
+✅ API Scan ready on port 8775
+✅ File Upload ready on port 8776
+✅ XSS Tester ready on port 8790
+✅ APISphere ready on port 8791
+✅ JS Analyser ready on port 8792
+✅ LLM/Command Injection ready on port 8793
+✅ Intruder ready on port 8794
+✅ Settings ready on port 8795
+✅ API Fuzzer ready on port 8796
+✅ Nuclei Scanner ready on port 8797
+✅ JWT Tool ready on port 8798
+🚀 Launching window...
+👋 App closed.
+[proxy] mitmproxy stopped

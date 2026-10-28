@@ -1,0 +1,1 @@
+{"__proto__":{"xss":"<script>alert(1)</script>"}}

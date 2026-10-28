@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nikto-nuclei-scanner
+  namespace: default
+spec:
+  ttlSecondsAfterFinished: 86400
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: scanner
+          image: nikto-nuclei-scanner:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TARGET_HOSTS
+              value: apps.visionwaves.com,eyops.visionwaves.com,one-sit.visionwaves.com
+            - name: CONCURRENCY
+              value: 2
+            - name: RATE_LIMIT
+              value: 15
+            - name: TIMEOUT
+              value: 7200
+            - name: OUTPUT_DIR
+              value: /app/reports
+          volumeMounts:
+            - name: reports-volume
+              mountPath: /app/reports
+      volumes:
+        - name: reports-volume
+          emptyDir: {}

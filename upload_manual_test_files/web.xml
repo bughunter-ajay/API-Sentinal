@@ -1,0 +1,1 @@
+<?xml version="1.0"?><web-app><servlet-mapping><url-pattern>*.php</url-pattern></servlet-mapping></web-app>

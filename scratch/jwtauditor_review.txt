@@ -1,0 +1,36 @@
+### 2. `dr34mhacks/jwtauditor` Review
+Yeh ek complete client-side testing platform hai jo Sid Joshi aur Sandeep Wawdane ne banaya hai.
+
+* **Huge 1.2 MB Potential Secrets Wordlist (`jwt_auditor_potent
+<truncated 2662 bytes>
+e Se Kya-Kya Use Kar Sakte Hain? (Top Recommendations)
+
+Hum apne tool ko bina kisi extra complex library ke in features se supercharge kar sakte hain:
+
+1. **`RS256` $\to$ `HS256` Key Confusion with Public Key (High Priority)**:
+   - UI me ek chhota optional input field de sakte hain: *"Target Public Key (PEM or JWKS URL)"*.
+   - Engine token ko `HS256` me convert karke us public key se sign karega. Yeh real-world bug bounty aur pentests me kaafi critical issue nikalta hai.
+2. **JWK Embedded Key Injection & JKU Spoofing**:
+   - Ek naya attack card: Header me attacker JWK embed karke signature bypass test karna.
+3. **Expanded KID Injection Suite (47+ Payloads)**:
+   - Abhi hamare paas sirf 2 kid attacks hain. Hum `jwtauditor` se Linux/Windows path traversal, null-byte traversal, aur SQL injection ke aur variations add kar sakte hain.
+4. **Copy Python PoC Script (Next to "Copy cURL PoC")**:
+   - PoC drawer me "Copy cURL" ke saath **"Copy Python PoC"** ka button de sakte hain jo client/QA reports me attach karne ke liye ready-to-run Python script generate karega.
+5. **Token Health & Sensitive Data Audit (Decoder Tab me Alerts)**:
+   - Jaise hi user token paste kare, niche ek chhota inspection box aaye:
+     - ⚠️ *Sensitive Claim Found: "password" / "credit_card" / "api_key"*
+     - ⚠️ *Security Warning: No 'exp' claim found (Token never expires)*
+     - ⚠️ *Missing 'aud' / 'iss' claims*
+6. **Bigger Wordlist for HMAC Secret Cracking**:
+   - Hamari 46-word list ko extend karke top 1,000 real-world exposed JWT secrets include kar sakte hain.
+
+---
+
+### Aapka Preference?
+Aapko inme se kaun se features sabse pehle chahiye?
+- **Option A**: **Key Confusion (RS256 $\to$ HS256 with Public Key) + JWK/JKU Injection + Expanded KID Payloads** (Attack capabilities badhane ke liye).
+- **Option B**: **Copy Python PoC Script + Success String matching** (Reporting & accuracy ke liye).
+- **Option C**: **Token Health & Sensitive Data Scanner** (Passive analysis ke liye).
+- **Option D**: Sabhi ko step-by-step integrate karein?
+=== STEP 5418 ===
+None

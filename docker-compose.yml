@@ -1,0 +1,15 @@
+services:
+  scanner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nikto-nuclei-scanner:latest
+    container_name: nikto-nuclei-scanner
+    volumes:
+      - ./reports:/app/reports
+    environment:
+      - TARGET_HOSTS=apps.visionwaves.com,eyops.visionwaves.com,talent.visionwaves.com,demo.visionwaves.com
+      - CONCURRENCY=2
+      - RATE_LIMIT=15
+      - TIMEOUT=7200
+      - OUTPUT_DIR=/app/reports
